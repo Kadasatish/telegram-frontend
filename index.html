@@ -1,49 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Telegram Live Chat</title>
-    <style>
-      body {
-        font-family: sans-serif;
-        padding: 20px;
-      }
-      #chat {
-        border: 1px solid #ccc;
-        padding: 10px;
-        height: 300px;
-        overflow-y: scroll;
-        background: #f9f9f9;
-      }
-      .msg {
-        margin-bottom: 8px;
-        padding: 5px;
-        background: #e6f7ff;
-        border-radius: 4px;
-      }
-    </style>
+    <title>Telegram Dot Status</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h2>📩 Telegram Live Messages</h2>
-    <div id="chat"></div>
-
-    <script>
-      const chatDiv = document.getElementById("chat");
-
-      async function loadMessages() {
-        const res = await fetch("https://telegram-backend-q7on.onrender.com/messages");
-        const messages = await res.json();
-        chatDiv.innerHTML = "";
-        messages.forEach((m) => {
-          const div = document.createElement("div");
-          div.className = "msg";
-          div.innerText = m;
-          chatDiv.appendChild(div);
-        });
-        chatDiv.scrollTop = chatDiv.scrollHeight;
-      }
-
-      setInterval(loadMessages, 2000); // Refresh every 2 sec
-      loadMessages();
-    </script>
+    <div id="dot" class="dot off"></div>
+    <input type="text" placeholder="Type something..." />
+    <script src="script.js"></script>
   </body>
 </html>
