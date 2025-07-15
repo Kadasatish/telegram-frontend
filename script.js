@@ -1,30 +1,26 @@
 const dot = document.getElementById("dot");
-let lastProcessed = "";
 
-async function updateDot() {
-  try {
-    const res = await fetch("https://telegram-backend-q7on.onrender.com/messages");
-    const data = await res.json();
-    const last = data[data.length - 1]?.trim();
-
-    // Check only if it's ₹5 and not already processed
-    if (last === "₹5" && last !== lastProcessed) {
-      lastProcessed = last;
-
-      // Turn white
-      dot.classList.add("on");
-      dot.classList.remove("off");
-
-      // After 5 seconds, turn back to black
-      setTimeout(() => {
-        dot.classList.add("off");
-        dot.classList.remove("on");
-      }, 5000);
-    }
-
-  } catch (e) {
-    console.error("Error fetching messages:", e);
-  }
+function fetchMessages() {
+  fetch("https://telegram-backend-q7on.onrender.com/messages")
+    .then((res) => res.json())
+    .then((data) => {
+      const lastMessage = data[data.length - 1];
+      if (lastMessage === "₹5") {
+        makeDotWhiteTemporarily();
+      }
+    })
+    .catch((err) => console.error("Error fetching messages:", err));
 }
 
-setInterval(updateDot, 2000);
+function makeDotWhiteTemporarily() {
+  // Dot ని white గా మారించు
+  dot.classList.add("white-dot");
+
+  // 5 seconds తర్వాత మళ్ళీ black dot కి మార్చు
+  setTimeout(() => {
+    dot.classList.remove("white-dot");
+  }, 5000);
+}
+
+// ప్రతి 2 seconds కి backend నుండి messages తెచ్చుకుంటుంది
+setInterval(fetchMessages, 2000);
