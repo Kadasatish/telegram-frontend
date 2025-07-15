@@ -1,33 +1,20 @@
 body {
   background-color: black;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   height: 100vh;
   margin: 0;
 }
 
-.dot {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-bottom: 20px;
-  border: 3px solid white;
-  transition: background-color 0.3s;
-}
-
-.dot.on {
-  background-color: white;
-}
-
-.dot.off {
+#dot {
+  width: 100px;
+  height: 100px;
   background-color: black;
+  border: 5px solid white;
+  border-radius: 50%;
 }
 
-input[type="text"] {
-  padding: 10px;
-  font-size: 16px;
-  border: none;
-  border-radius: 4px;
+.white-dot {
+  background-color: white;
 }
